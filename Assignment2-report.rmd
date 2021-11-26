@@ -1,0 +1,153 @@
+---
+title: "Lab4Q2-report"
+author: "Jaskirat S Marar"
+date: "11/25/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Assignment2
+
+We are given the following:
+
+$$
+n = number\  of\  observations
+$$
+
+$$
+\vec{\mu} = (\mu_1, ...,\mu_n) \ are \ unknown \ parameters \\
+$$
+
+$$
+Y_i \sim N(\mu_i, variance=0.2), \ i=1,...,n \\
+$$
+
+$$
+Prior: \ p(\mu_1) = 1 \ ; \ p(\mu_{i+1}|\mu_i) = N(\mu_i, 0.2), \ i=1,...,(n-1) \\
+$$
+We'll be interested in deriving the posterior i.e. P($\mu$|Y) using the Bayes' theorem as follows:
+
+$$
+posterior = likelihood \ * \ prior \\
+$$
+$$
+P(\vec{\mu}|Y) = \frac{P(Y|\vec{\mu}) * P(\vec{\mu})}{\int_{\mu}P(Y|\vec{\mu})P(\vec{\mu})d\mu} \\
+$$
+
+Since the denominator is constant w.r.t $\mu$, we can drop it in favour of proportionality
+
+$$
+posterior \propto likelihood \ * \ prior \\
+$$
+$$
+P(\vec{\mu}|Y) \propto P(Y|\vec{\mu}) * P(\vec{\mu})
+$$
+
+First we define the likelihood:
+
+$$
+L(Y_i|\mu_i) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}}exp\Big(-\frac{1}{2\sigma^2}(Y_i-\mu_i)^2\Big) \\
+$$
+Since, we are only interested in the terms dependent on the parameter $\mu$ we can drop the term at the start of the expression and the likelihood then becomes:
+
+$$
+L(Y_i|\mu_i) \propto exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2\Big) \\
+$$
+Similarly, now for the prior using chain rule,
+
+$$
+P(\vec{\mu}) = P(\mu_1).P(\mu_2|\mu_1).P(\mu_3|\mu_2)...P(\mu_n|\mu_{n-1}) \ \ \ \ \ \ \ \ \ \ \ ...(a) \\
+$$
+$$
+ = \prod_{i=1}^{n-1}P(\mu_{i+1}|\mu_i) \ \sim \ N(\mu_i,\sigma_{\mu_i}^2) \\
+$$
+$$
+ = \prod_{i=1}^{n-1}\frac{1}{\sqrt{2\pi\sigma^2}}exp\Big(-\frac{1}{2\sigma_\mu^2}(\mu_{i+1}-\mu_i)^2\Big) \\
+$$
+$$
+ \propto exp\Big(-\frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2\Big) \\
+$$
+Hence, we can now write our posterior as the following:
+
+$$
+P(\vec{\mu}|Y) \propto exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2\Big)\ * \  exp\Big(-\frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2\Big) \\
+$$
+$$
+\propto exp\Big[ -\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2 - \frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2  \Big] \ \ \ \ ...(b)
+$$
+Since, $\sigma$ is given to be same everywhere in the problem we can use common notation across the expression.
+
+Moving to the next part to find conditional probability $(\mu_k|\mu_{-k})$, we know that by the definition of conditional probability, the joint probability of the prior, P($\vec\mu$), can be expanded into the conditional components of each individual $\mu_k$ and can be expressed as
+
+$$
+P(\vec{\mu}) \propto P(\mu_k | \vec\mu) * P(\mu_1,...,\mu_{k-1},\mu_{k+1},...,\mu_n) \\
+$$
+Or in a more condensed form as,
+
+$$
+P(\mu_i|\vec\mu_{-i}, \vec Y) = \frac{P(\vec{\mu} | \vec Y)}{P(\vec\mu_{-i}| \vec Y)} \ \ \ \ \ \ \ \ \ \ ...(c) \\
+$$
+$$
+ = \frac{P(\vec{\mu} | \vec Y)}{\int P(\vec\mu| \vec Y)d\mu}  \\
+$$
+We now solve for $\mu_1$
+
+$$
+P(\mu_1|\vec\mu_{-1},\vec Y) = \frac{P(\vec\mu,\vec Y)}{\int P(\vec\mu,\vec Y)d\mu_1} \\
+$$
+$$
+= \frac{\prod_{i=2}^{n}P(Y_i|\mu_i)\prod_{i=3}^{n}P(\mu_i|\mu_{i-1})P(\mu_2|\mu_1)P(Y_1|\mu_1)P(\mu_1)}{\prod_{i=2}^{n}P(Y_i|\mu_i)\prod_{i=3}^{n}P(\mu_i|\mu_{i-1})\int P(\mu_2|\mu_1)P(Y_1|\mu_1)P(\mu_1)d\mu_1}
+$$
+Common product terms cancel out in numerator and denominator, and the integral is constant w.r.t. $\mu_1$
+
+$$
+P(\mu_1|\vec\mu_{-1},\vec Y) \propto P(\mu_2|\mu_1)P(Y_1|\mu_1)P(\mu_1) \\
+$$
+$$
+\propto exp\Big(-\frac{1}{2\sigma^2}(\mu_2 - \mu_1)^2 \Big) \ * \ exp \Big(-\frac{1}{2\sigma^2}(Y_1 - \mu_1)^2 \Big) \ * \ 1 \\
+$$
+$$
+\propto exp\Big(- \Big(\frac{1}{2\sigma^2} \Big) \Big((\mu_2 - \mu_1)^2 + (Y_1 - \mu_1)^2 \Big) \Big)
+$$
+using *Hint B*
+
+$$
+P(\mu_1|\vec\mu_{-1},\vec Y) \propto exp \Big( - \frac{(\mu_1 - (Y_1 + \mu_2)/2)^2}{\sigma^2} \Big) \ \sim \ N\Big((\frac{Y_1+\mu_2}{2}),\frac{\sigma^2}{2}\Big)
+$$
+
+Similarly, we now check the case for $\mu_n$. Here we use the posterior we defined in (b) and the relationship we established in (c)
+
+$$
+P(\mu_n|\vec\mu_{-n}, \vec Y) = \frac{P(\vec{\mu} | \vec Y)}{P(\vec\mu_{-n}| \vec Y)} \\
+$$
+$$
+\propto \frac{exp \Big(- \sum_{i=1}^{n-1} \frac{(\mu_{i+1} - \mu_i)^2}{2\sigma^2} - \sum_{i=1}^{n}\frac{(Y_{i} - \mu_i)^2}{2\sigma^2} \Big)}{exp \Big(- 
+\sum_{i=1}^{n-2} \frac{(\mu_{i+1} - \mu_i)^2}{2\sigma^2} - \sum_{i=1}^{n-1}\frac{(Y_{i} - \mu_i)^2}{2\sigma^2} \Big)} \\
+$$
+$$
+\propto exp \Big(- \Big(\frac{1}{2\sigma^2} \Big) \Big((\mu_n - \mu_{n-1})^2 + (Y_n - \mu_n)^2 \Big) \Big)
+$$
+again using *hint B*
+
+$$
+P(\mu_n|\vec\mu_{-n},\vec Y) \propto exp \Big( - \frac{(\mu_n - (Y_n + \mu_{n-1})/2)^2}{\sigma^2} \Big) \ \sim \ N\Big((\frac{Y_n+\mu_{n-1}}{2}),\frac{\sigma^2}{2}\Big)
+$$
+
+Now for the tedious case of $\mu_i$ where is i $\not\in$ (1,n)
+
+
+$$
+P(\mu_i|\vec\mu_{-i},\vec Y) \propto  P(\mu_{i+1}|\mu_i)P(Y_i|\mu_i)P(\mu_i|\mu_{i-1}) \\
+\propto exp\Big[- \Big(\frac{1}{2\sigma^2} \Big) \Big( (\mu_{i+1} - \mu_{i})^2 + (Y_i - \mu_i)^2 + (\mu_{i} - \mu_{i-1})^2 \Big) \Big]
+$$
+Using *hint C*
+
+$$
+P(\mu_i|\vec\mu_{-i},\vec Y) \propto exp\Big[ - \frac{(\mu_i-(Y_i+\mu_{i-1}+\mu_{i+1})/3)^2}{2\sigma^2/3} \Big] \ \sim \ N\Big((\frac{Y_i+\mu_{i-1}+\mu_{i+1}}{3}),\frac{\sigma^2}{3}\Big)
+$$
+
+
+

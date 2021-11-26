@@ -1,0 +1,58 @@
+---
+title: "Untitled"
+author: "Jaskirat S Marar"
+date: "11/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We are given the following:
+
+$$
+n = number\  of\  observations \\
+\vec{\mu} = (\mu_1, ...,\mu_n) \ are \ unknown \ parameters \\
+Y_i \sim N(\mu_i, variance=0.2), \ i=1,...,n \\
+Prior: \ p(\mu_1) = 1 \ ; \ p(\mu_{i+1}|\mu_i) = N(\mu_i, 0.2), \ i=1,...,(n-1) \\
+$$
+We'll be interested in deriving the posterior i.e. P(\mu|Y) using the Bayes' theorem as follows:
+
+$$
+posterior = likelihood \ * \ prior \\
+P(\vec{\mu}|Y) = \frac{P(Y|\vec{\mu}) * P(\vec{\mu})}{\int_{\mu}P(Y|\vec{\mu})P(\vec{\mu})d\mu} \\
+$$
+
+Since the denominator is constant w.r.t $\mu$, we can drop it in favour of proportionality
+
+$$
+posterior \propto likelihood \ * \ prior \\
+P(\vec{\mu}|Y) \propto P(Y|\vec{\mu}) * P(\vec{\mu})
+$$
+
+First we define the likelihood:
+
+$$
+L(Y_i|\mu_i) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}}exp\Big(-\frac{1}{2\sigma^2}(Y_i-\mu_i)^2\Big) \\
+$$
+Since, we are only interested in the terms dependent on the parameter $\mu$ we can drop the term at the start of the expression and the likelihood then becomes:
+
+$$
+L(Y_i|\mu_i) \propto exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2\Big) \\
+$$
+Similarly, now for the prior using chain rule,
+
+$$
+P(\vec{\mu}) = P(\mu_1).P(\mu_2|\mu_1).P(\mu_3|\mu_2)...P(\mu_n|\mu_{n-1}) \ \ \ \ \ \ \ \ \ \ \ (a) \\
+ = \prod_{i=1}^{n-1}P(\mu_{i+1}|\mu_i) \ \sim \ N(\mu_i,\sigma_{\mu_i}^2) \\
+ = \prod_{i=1}^{n-1}\frac{1}{\sqrt{2\pi\sigma^2}}exp\Big(-\frac{1}{2\sigma_\mu^2}(\mu_{i+1}-\mu_i)^2\Big) \\
+ \propto exp\Big(-\frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2\Big) \\
+$$
+Hence, we can now write our posterior as the following:
+
+$$
+P(\vec{\mu}|Y) \propto exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2\Big)\ * \  exp\Big(-\frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2\Big) \\
+\propto exp\Big[ -\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2 - \frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2  \Big]
+$$
+Since, $\sigma$ is given to be same everywhere in the problem we can use common notation across the expression.
