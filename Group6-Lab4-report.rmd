@@ -1,8 +1,6 @@
 ---
 title: "CS-Lab4Group6-report"
-author: {Jaskirat S Marar (jasma356), 
-Filip Berndtsson (filbe354), 
-Dinuke Jayaweera (dinja628)}
+author: Jaskirat S Marar (jasma356), Filip Berndtsson (filbe354), Dinuke Jayaweera (dinja628)
 date: "11/25/2021"
 output: pdf_document
 ---
@@ -185,6 +183,7 @@ We now set $t= \beta x$ giving us a easier expression. $\frac{\beta^{\alpha}}{\G
 Now we plug in your values for $\alpha$ and $\beta$ and get $\frac{6}{1}=6$.
 This is in line with what we got in 1.4
 
+\newpage
 
 # Assignment2
 

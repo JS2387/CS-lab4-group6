@@ -1,0 +1,621 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\endhead
+title: ``CS-Lab4Group6-report'' \\
+author: \{Jaskirat S Marar (jasma356), \\
+Filip Berndtsson (filbe354), \\
+Dinuke Jayaweera (dinja628)\} \\
+date: ``11/25/2021'' \\
+output: pdf\_document \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{statement-of-contribution}{%
+\section{Statement of contribution}\label{statement-of-contribution}}
+
+This lab was done by 3 people in the group.
+
+The primary responsibility for the 1st problem was taken on by Filip,
+while the 2nd problem was solved by Jaskirat with Dinuke's help.
+
+\hypertarget{assignment1}{%
+\section{Assignment1}\label{assignment1}}
+
+We start out by finding the constant for this function. If we realize
+this is a Gamma function finding the constant is quite easy. Looking at
+\(x^5e^{-x}, x>0\). If we have a look at the pdf for a Gamma PDF we have
+\(f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}\).
+Looking at this we realise that for \(\beta = 1\) and \(\alpha=6\) we
+get \(x^5e^{-x}\) and we now just need to find the constant multiplier.
+Since we now know \(\beta\) and \(\alpha\) we can use the constant
+multiplier formula for a gamma function which we know to be
+\[\frac{\beta^{\alpha}}{\Gamma(\alpha)}\] , by plugging in our values we
+get: \(\frac{1^{6}}{\Gamma(6)}= \frac{1}{5!}\)
+
+This gives \(f(x)=\frac{1}{5!} x^5e^{-x}\)
+
+\hypertarget{section}{%
+\subsubsection{1.1}\label{section}}
+
+In this assignment we will be creating a Metropolis-Hastings algorithm.
+It works as follows.
+
+First we select a initial \(\theta_{0}\) value and then we do the
+following. For \(i=1,.....,n\) we draw a candiate value
+\(\theta^{*}\)\textasciitilde{}\(g(\theta^{*}|\theta_{i-1})\). After
+this we calulate our \(\alpha\) value.\\
+\(\alpha = \frac{g(\theta^{*})/g(\theta^{*}|\theta_{i-1}) }{g(\theta_{i-1})/g(\theta_{i-1}|\theta^{*})} = \frac{g(\theta^{*})g(\theta_{i-1}|\theta^{*}) }{g(\theta_{i-1}) g(\theta^{*}|\theta_{i-1})}\)\\
+If \(\alpha \geq 1\) we accept the \(\theta^{*}\) and set that to our
+current \(\theta_i\). For \(0 < \alpha <1\) we accept the \(\theta\) and
+assign \(\theta_i=\theta^{*}\) with the probability \(\alpha\).If non of
+these happens we reject \(\theta^{*}\) and we assign
+\(\theta_i = \theta^{*}\) with the probability \(1-\alpha\). This is
+what our code below does.\\
+Bellow our code can be seen. We first create a function that contains
+our targeted distrubution given in the assignment. Then we create the
+main function which takes three arguments , the numbers of steps , a
+starting point and probability P.The rest of the code does the things
+stated above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.1.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(coda)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'coda' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Target distrubution function}
+\NormalTok{pdf\_function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) x}\SpecialCharTok{\^{}}\DecValTok{5}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{x)}
+
+\CommentTok{\# Initiate Metropolis{-}Hastings algorithm}
+\NormalTok{Metro\_hast }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(steps ,starting\_point, p )\{}
+  \CommentTok{\#variable to keep track of our current point. }
+\NormalTok{  current\_point }\OtherTok{\textless{}{-}}\NormalTok{ starting\_point}
+  
+  \CommentTok{\#Loop to do our calulations}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\NormalTok{steps)\{}
+\NormalTok{    currentX }\OtherTok{\textless{}{-}}\NormalTok{ current\_point[i}\DecValTok{{-}1}\NormalTok{]}
+\NormalTok{    X\_to\_evaluate }\OtherTok{\textless{}{-}} \FunctionTok{rlnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{meanlog =} \FunctionTok{log}\NormalTok{(currentX) , p)}
+\NormalTok{    Uniform\_var }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+    
+\NormalTok{    ratio\_numerator }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{pdf\_function}\NormalTok{(X\_to\_evaluate)}\SpecialCharTok{*} \FunctionTok{dlnorm}\NormalTok{(currentX, }\AttributeTok{meanlog =} \FunctionTok{log}\NormalTok{(X\_to\_evaluate), p) )}
+\NormalTok{    denominator }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{pdf\_function}\NormalTok{(currentX)}\SpecialCharTok{*}\FunctionTok{dlnorm}\NormalTok{(X\_to\_evaluate,}\AttributeTok{meanlog=}\FunctionTok{log}\NormalTok{(X\_to\_evaluate), p))}
+    
+\NormalTok{    alpha }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(}\DecValTok{1}\NormalTok{ , ratio\_numerator }\SpecialCharTok{/}\NormalTok{ denominator)}
+    
+    \ControlFlowTok{if}\NormalTok{(Uniform\_var }\SpecialCharTok{\textless{}=}\NormalTok{ alpha)current\_point[i] }\OtherTok{\textless{}{-}}\NormalTok{ X\_to\_evaluate}
+    
+    \ControlFlowTok{else}\NormalTok{ current\_point[i] }\OtherTok{\textless{}{-}}\NormalTok{ currentX}
+\NormalTok{  \}}
+ \CommentTok{\# Return the points}
+\NormalTok{  current\_point}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Now we want to visualize the data generated by our function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sample\_1}\OtherTok{\textless{}{-}}\FunctionTok{Metro\_hast}\NormalTok{(}\DecValTok{2000}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{df\_1 }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(sample\_1)}
+\NormalTok{df\_1}\SpecialCharTok{$}\NormalTok{ID }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2000}
+
+\FunctionTok{ggplot}\NormalTok{(df\_1 , }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ ID , }\AttributeTok{y =}\NormalTok{ sample\_1))}\SpecialCharTok{+}\FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment2-report_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+We set the numbers of steps to 2000, the starting point to one and the
+probability to one and get the plot above. Looking at the plot it does
+look like the mcmc is converging.
+
+\#\#1.2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Metro\_hast\_chi }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(steps ,starting\_point )\{}
+  \CommentTok{\#create our vectors }
+\NormalTok{  current\_point }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(starting\_point, steps)}
+  
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\NormalTok{steps) \{}
+    
+\NormalTok{    currentX }\OtherTok{\textless{}{-}}\NormalTok{ current\_point[i}\DecValTok{{-}1}\NormalTok{]}
+    
+\NormalTok{    X\_to\_evaluate }\OtherTok{\textless{}{-}} \FunctionTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{df=}\FunctionTok{floor}\NormalTok{(currentX }\SpecialCharTok{+}\DecValTok{1}\NormalTok{))}
+    
+\NormalTok{    Uniform\_var }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+    
+\NormalTok{    ratio\_numerator }\OtherTok{\textless{}{-}} \FunctionTok{pdf\_function}\NormalTok{(X\_to\_evaluate)}\SpecialCharTok{*}\FunctionTok{dchisq}\NormalTok{(currentX, }\AttributeTok{df=}\FunctionTok{floor}\NormalTok{(X\_to\_evaluate}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))}
+    
+\NormalTok{    denominator }\OtherTok{\textless{}{-}} \FunctionTok{pdf\_function}\NormalTok{(currentX)}\SpecialCharTok{*}\FunctionTok{dchisq}\NormalTok{(X\_to\_evaluate, }\AttributeTok{df=}\FunctionTok{floor}\NormalTok{(currentX}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))}
+    
+\NormalTok{    alpha }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(}\DecValTok{1}\NormalTok{ , ratio\_numerator }\SpecialCharTok{/}\NormalTok{ denominator)}
+
+    \ControlFlowTok{if}\NormalTok{(Uniform\_var }\SpecialCharTok{\textless{}=}\NormalTok{ alpha)current\_point[i] }\OtherTok{\textless{}{-}}\NormalTok{ X\_to\_evaluate}
+    \ControlFlowTok{else}\NormalTok{ current\_point[i] }\OtherTok{\textless{}{-}}\NormalTok{ currentX}
+    
+    
+    
+\NormalTok{  \}}
+\NormalTok{  current\_point}
+  
+  
+\NormalTok{\}}
+
+\NormalTok{sample2}\OtherTok{\textless{}{-}}\FunctionTok{Metro\_hast\_chi}\NormalTok{(}\DecValTok{5000}\NormalTok{,}\FunctionTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{df\_2 }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(sample2)}
+\NormalTok{df\_2}\SpecialCharTok{$}\NormalTok{ID }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5000}
+
+\FunctionTok{ggplot}\NormalTok{(df\_2 , }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ ID , }\AttributeTok{y =}\NormalTok{ sample2))}\SpecialCharTok{+}\FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment2-report_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+Above we create another Metropolis-Hastings algorithm that uses
+\(\chi^2([X_t+1])\) as the proposal distrubution. The code works in the
+same way as our function in 1.1. Looking at the plot it does seem like
+this mcm also converges. \#\#\# 1.3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{one\_to\_ten }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+
+\NormalTok{Matrix\_1}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(,}\DecValTok{10}\NormalTok{,}\DecValTok{2000}\NormalTok{)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
+\NormalTok{  Matrix\_1[one\_to\_ten,] }\OtherTok{\textless{}{-}} \FunctionTok{Metro\_hast\_chi}\NormalTok{(}\DecValTok{2000}\NormalTok{, i )}
+\NormalTok{\}}
+
+\NormalTok{Gelman\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{) \{}
+  
+\NormalTok{  Gelman\_list[[i]]}\OtherTok{\textless{}{-}} \FunctionTok{as.mcmc}\NormalTok{(Matrix\_1[i,])}
+  
+\NormalTok{\}}
+\FunctionTok{gelman.diag}\NormalTok{(Gelman\_list, }\AttributeTok{confidence =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{transform=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{autoburnin=}\ConstantTok{TRUE}\NormalTok{,}
+            \AttributeTok{multivariate=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Potential scale reduction factors:
+## 
+##      Point est. Upper C.I.
+## [1,]          1          1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{gelman.plot}\NormalTok{(Gelman\_list, }\AttributeTok{bin.width =} \DecValTok{10}\NormalTok{, }\AttributeTok{max.bins =} \DecValTok{50}\NormalTok{,}
+            \AttributeTok{confidence =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment2-report_files/figure-latex/unnamed-chunk-4-1.pdf}
+Above we see the Gelman--Rubin method and get a value of one which
+should be considered very good. This means that the variance within
+chains and between chains variance are equal. Looking at the plot
+showing a Gelman plot we can also see that the chains seems to converge
+after around 300 steps. After this point there is a few upticks but it
+seems to mostly converge.
+
+\hypertarget{section-1}{%
+\subsubsection{1.4}\label{section-1}}
+
+We now want to investigate the following integral.
+\(\int_{0}^{\infty} xf(x) dx\) where \(f(x)= \frac{1}{5!}x^5e^{-x}\). We
+can immediately realise that \(\int_{0}^{\infty} f(x) dx = 1\) since
+integrating over a Probability density function gives us the cumulative
+distribution function which always equals one. We now set \(g(x) = x\)
+and obtain the following expression.
+\(\int_{0}^{\infty} g(x)f(x)dx= E[g(X)]= \dfrac{1}{n}\sum_{i=1}^{n}E[X_i]=\frac{1}{n}\sum_{i=1}^{n}x_{i}\)\\
+We now calculate the mean from the data generated by our two functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{draw\_1 }\OtherTok{\textless{}{-}}\FunctionTok{Metro\_hast}\NormalTok{(}\DecValTok{100000}\NormalTok{,}\FunctionTok{rlnorm}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DecValTok{1}\NormalTok{)}
+\FunctionTok{mean}\NormalTok{(draw\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6.004613
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{draw\_2 }\OtherTok{\textless{}{-}} \FunctionTok{Metro\_hast\_chi}\NormalTok{(}\DecValTok{100000}\NormalTok{,}\FunctionTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\FunctionTok{floor}\NormalTok{(}\DecValTok{1}\NormalTok{)))}
+\FunctionTok{mean}\NormalTok{(draw\_2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6.001918
+\end{verbatim}
+
+We can see here that both functions has a mean \(\approx 6\) for a big
+sample. If we increase the size of the samples we should get even closer
+to 6.
+
+\hypertarget{section-2}{%
+\paragraph{1.5}\label{section-2}}
+
+The Gamma pdf is as follows:
+\(f_x(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha -1 }e^{-\beta x}\)
+To find the expected value we do the following
+\(E[X]=\int_{0}^{\infty}xf(x)dx= \frac{\beta^{\alpha}}{\Gamma(\alpha)}\int_{0}^{\infty}x^{{\alpha}}e^{-\beta x}dx\).
+We now set \(t= \beta x\) giving us a easier expression.
+\(\frac{\beta^{\alpha}}{\Gamma(\alpha)} \int_{0}^{\infty} \left( \frac{t}{\beta}\right)^{\alpha}e^{-t}\frac{dt}{\beta}=\frac{\beta^{\alpha}}{\beta^{\alpha+1}\Gamma(\alpha)}\int_{0}^{\infty}t^{\alpha}e^{-t}dt = \frac{\Gamma(\alpha +1)}{\beta \Gamma(\alpha)}\)
+Here we now use the definition of the Gamma function to get:
+\(\frac{\alpha\Gamma(\alpha)}{\beta \Gamma(\alpha)} = \frac{\alpha}{\beta}\)
+\(\square\)\\
+Now we plug in your values for \(\alpha\) and \(\beta\) and get
+\(\frac{6}{1}=6\). This is in line with what we got in 1.4
+
+\hypertarget{assignment2}{%
+\section{Assignment2}\label{assignment2}}
+
+We are given the following:
+
+\[
+n = number\  of\  observations
+\]
+
+\[
+\vec{\mu} = (\mu_1, ...,\mu_n) \ are \ unknown \ parameters \\
+\]
+
+\[
+Y_i \sim N(\mu_i, variance=0.2), \ i=1,...,n \\
+\]
+
+\[
+Prior: \ p(\mu_1) = 1 \ ; \ p(\mu_{i+1}|\mu_i) = N(\mu_i, 0.2), \ i=1,...,(n-1) \\
+\] We'll be interested in deriving the posterior
+i.e.~P(\(\mu\)\textbar Y) using the Bayes' theorem as follows:
+
+\[
+posterior = likelihood \ * \ prior \\
+\] \[
+P(\vec{\mu}|Y) = \frac{P(Y|\vec{\mu}) * P(\vec{\mu})}{\int_{\mu}P(Y|\vec{\mu})P(\vec{\mu})d\mu} \\
+\]
+
+Since the denominator is constant w.r.t \(\mu\), we can drop it in
+favour of proportionality
+
+\[
+posterior \propto likelihood \ * \ prior \\
+\] \[
+P(\vec{\mu}|Y) \propto P(Y|\vec{\mu}) * P(\vec{\mu})
+\]
+
+First we define the likelihood:
+
+\[
+L(Y_i|\mu_i) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi\sigma^2}}exp\Big(-\frac{1}{2\sigma^2}(Y_i-\mu_i)^2\Big) \\
+\] Since, we are only interested in the terms dependent on the parameter
+\(\mu\) we can drop the term at the start of the expression and the
+likelihood then becomes:
+
+\[
+L(Y_i|\mu_i) \propto exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2\Big) \\
+\] Similarly, now for the prior using chain rule,
+
+\[
+P(\vec{\mu}) = P(\mu_1).P(\mu_2|\mu_1).P(\mu_3|\mu_2)...P(\mu_n|\mu_{n-1}) \ \ \ \ \ \ \ \ \ \ \ ...(a) \\
+\] \[
+ = \prod_{i=1}^{n-1}P(\mu_{i+1}|\mu_i) \ \sim \ N(\mu_i,\sigma_{\mu_i}^2) \\
+\] \[
+ = \prod_{i=1}^{n-1}\frac{1}{\sqrt{2\pi\sigma^2}}exp\Big(-\frac{1}{2\sigma_\mu^2}(\mu_{i+1}-\mu_i)^2\Big) \\
+\] \[
+ \propto exp\Big(-\frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2\Big) \\
+\] Hence, we can now write our posterior as the following:
+
+\[
+P(\vec{\mu}|Y) \propto exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2\Big)\ * \  exp\Big(-\frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2\Big) \\
+\] \[
+\propto exp\Big[ -\frac{1}{2\sigma^2}\sum_{i=1}^n(Y_i-\mu_i)^2 - \frac{1}{2\sigma_\mu^2}\sum_{i=1}^{n-1}(\mu_{i+1}-\mu_i)^2  \Big] \ \ \ \ ...(b)
+\] Since, \(\sigma\) is given to be same everywhere in the problem we
+can use common notation across the expression.
+
+Moving to the next part to find conditional probability
+\((\mu_k|\mu_{-k})\), we know that by the definition of conditional
+probability, the joint probability of the prior, P(\(\vec\mu\)), can be
+expanded into the conditional components of each individual \(\mu_k\)
+and can be expressed as
+
+\[
+P(\vec{\mu}) \propto P(\mu_k | \vec\mu) * P(\mu_1,...,\mu_{k-1},\mu_{k+1},...,\mu_n) \\
+\] Or in a more condensed form as,
+
+\[
+P(\mu_i|\vec\mu_{-i}, \vec Y) = \frac{P(\vec{\mu} | \vec Y)}{P(\vec\mu_{-i}| \vec Y)} \ \ \ \ \ \ \ \ \ \ ...(c) \\
+\] \[
+ = \frac{P(\vec{\mu} | \vec Y)}{\int P(\vec\mu| \vec Y)d\mu}  \\
+\] We now solve for \(\mu_1\)
+
+\[
+P(\mu_1|\vec\mu_{-1},\vec Y) = \frac{P(\vec\mu,\vec Y)}{\int P(\vec\mu,\vec Y)d\mu_1} \\
+\] \[
+= \frac{\prod_{i=2}^{n}P(Y_i|\mu_i)\prod_{i=3}^{n}P(\mu_i|\mu_{i-1})P(\mu_2|\mu_1)P(Y_1|\mu_1)P(\mu_1)}{\prod_{i=2}^{n}P(Y_i|\mu_i)\prod_{i=3}^{n}P(\mu_i|\mu_{i-1})\int P(\mu_2|\mu_1)P(Y_1|\mu_1)P(\mu_1)d\mu_1}
+\] Common product terms cancel out in numerator and denominator, and the
+integral is constant w.r.t. \(\mu_1\)
+
+\[
+P(\mu_1|\vec\mu_{-1},\vec Y) \propto P(\mu_2|\mu_1)P(Y_1|\mu_1)P(\mu_1) \\
+\] \[
+\propto exp\Big(-\frac{1}{2\sigma^2}(\mu_2 - \mu_1)^2 \Big) \ * \ exp \Big(-\frac{1}{2\sigma^2}(Y_1 - \mu_1)^2 \Big) \ * \ 1 \\
+\] \[
+\propto exp\Big(- \Big(\frac{1}{2\sigma^2} \Big) \Big((\mu_2 - \mu_1)^2 + (Y_1 - \mu_1)^2 \Big) \Big)
+\] using \emph{Hint B}
+
+\[
+P(\mu_1|\vec\mu_{-1},\vec Y) \propto exp \Big( - \frac{(\mu_1 - (Y_1 + \mu_2)/2)^2}{\sigma^2} \Big) \ \sim \ N\Big((\frac{Y_1+\mu_2}{2}),\frac{\sigma^2}{2}\Big)
+\]
+
+Similarly, we now check the case for \(\mu_n\). Here we use the
+posterior we defined in (b) and the relationship we established in (c)
+
+\[
+P(\mu_n|\vec\mu_{-n}, \vec Y) = \frac{P(\vec{\mu} | \vec Y)}{P(\vec\mu_{-n}| \vec Y)} \\
+\] \[
+\propto \frac{exp \Big(- \sum_{i=1}^{n-1} \frac{(\mu_{i+1} - \mu_i)^2}{2\sigma^2} - \sum_{i=1}^{n}\frac{(Y_{i} - \mu_i)^2}{2\sigma^2} \Big)}{exp \Big(- 
+\sum_{i=1}^{n-2} \frac{(\mu_{i+1} - \mu_i)^2}{2\sigma^2} - \sum_{i=1}^{n-1}\frac{(Y_{i} - \mu_i)^2}{2\sigma^2} \Big)} \\
+\] \[
+\propto exp \Big(- \Big(\frac{1}{2\sigma^2} \Big) \Big((\mu_n - \mu_{n-1})^2 + (Y_n - \mu_n)^2 \Big) \Big)
+\] again using \emph{hint B}
+
+\[
+P(\mu_n|\vec\mu_{-n},\vec Y) \propto exp \Big( - \frac{(\mu_n - (Y_n + \mu_{n-1})/2)^2}{\sigma^2} \Big) \ \sim \ N\Big((\frac{Y_n+\mu_{n-1}}{2}),\frac{\sigma^2}{2}\Big)
+\]
+
+Now for the tedious case of \(\mu_i\) where is i \(\not\in\) (1,n)
+
+\[
+P(\mu_i|\vec\mu_{-i},\vec Y) \propto  P(\mu_{i+1}|\mu_i)P(Y_i|\mu_i)P(\mu_i|\mu_{i-1}) \\
+\propto exp\Big[- \Big(\frac{1}{2\sigma^2} \Big) \Big( (\mu_{i+1} - \mu_{i})^2 + (Y_i - \mu_i)^2 + (\mu_{i} - \mu_{i-1})^2 \Big) \Big]
+\] Using \emph{hint C}
+
+\[
+P(\mu_i|\vec\mu_{-i},\vec Y) \propto exp\Big[ - \frac{(\mu_i-(Y_i+\mu_{i-1}+\mu_{i+1})/3)^2}{2\sigma^2/3} \Big] \ \sim \ N\Big((\frac{Y_i+\mu_{i-1}+\mu_{i+1}}{3}),\frac{\sigma^2}{3}\Big)
+\] We now use these derivations to design a Gibbs sampler which will
+estimate \(\vec\mu\) for 1000 values of \(\mu\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#load the data}
+\FunctionTok{load}\NormalTok{(}\StringTok{"chemical.RData"}\NormalTok{)                           }
+\CommentTok{\#converting data into a DF}
+\NormalTok{chemical\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(X, Y)                  }
+\CommentTok{\#initial plot of data to understand distribution}
+\FunctionTok{plot}\NormalTok{(X, Y) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment2-report_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#3 inputs to sampler: \# of time steps, Y to be estimated, known sigma}
+\NormalTok{mc\_gibbs }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(step, Y, sig) \{             }
+\NormalTok{  mu\_i }\OtherTok{\textless{}{-}} \DecValTok{0}
+  \CommentTok{\#initialize matrix to store results of sampler in each iteration}
+\NormalTok{  result\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{50}\NormalTok{, }\AttributeTok{ncol =}\NormalTok{ step)     }
+  \ControlFlowTok{for}\NormalTok{ (tstep }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(step}\DecValTok{{-}1}\NormalTok{)) \{}
+    \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{) \{}
+      \CommentTok{\#Case for mu\_1}
+      \ControlFlowTok{if}\NormalTok{ (i}\SpecialCharTok{==}\DecValTok{1}\NormalTok{) \{                                  }
+\NormalTok{        mu\_i }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(result\_matrix[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,tstep],Y[i])}
+\NormalTok{        result\_matrix[i,tstep}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ mu\_i, }\AttributeTok{sd =}\NormalTok{ sig}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{2}\NormalTok{))}
+\NormalTok{      \}}
+      \CommentTok{\#Case for mu\_n}
+      \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (i }\SpecialCharTok{==} \DecValTok{50}\NormalTok{) \{                      }
+\NormalTok{        mu\_i }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(result\_matrix[i}\DecValTok{{-}1}\NormalTok{,tstep}\SpecialCharTok{+}\DecValTok{1}\NormalTok{],Y[i])}
+\NormalTok{        result\_matrix[i,tstep}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ mu\_i, }\AttributeTok{sd =}\NormalTok{ sig}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{2}\NormalTok{))}
+\NormalTok{      \}}
+      \CommentTok{\#Case for mu\_i}
+      \ControlFlowTok{else}\NormalTok{ \{                                   }
+\NormalTok{        mu\_i }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y[i],result\_matrix[i}\DecValTok{{-}1}\NormalTok{,tstep}\SpecialCharTok{+}\DecValTok{1}\NormalTok{], result\_matrix[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,tstep])}
+\NormalTok{        result\_matrix[i,tstep}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ mu\_i, }\AttributeTok{sd =}\NormalTok{ sig}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{3}\NormalTok{))}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(result\_matrix)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Plotting the results of the sampler:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#function call with 1000 steps and variance 0.2}
+\NormalTok{gibbs\_output }\OtherTok{\textless{}{-}} \FunctionTok{mc\_gibbs}\NormalTok{(}\DecValTok{1000}\NormalTok{, chemical\_df}\SpecialCharTok{$}\NormalTok{Y, }\FunctionTok{sqrt}\NormalTok{(}\FloatTok{0.2}\NormalTok{))        }
+\CommentTok{\#append expected values of mu to original DF}
+\NormalTok{gibbs\_result }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(chemical\_df, }\FunctionTok{rowMeans}\NormalTok{(gibbs\_output))      }
+\FunctionTok{names}\NormalTok{(gibbs\_result) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"X"}\NormalTok{, }\StringTok{"Y"}\NormalTok{, }\StringTok{"expected\_mu"}\NormalTok{)               }
+\CommentTok{\#Plot original points}
+\FunctionTok{plot}\NormalTok{(gibbs\_result}\SpecialCharTok{$}\NormalTok{X, gibbs\_result}\SpecialCharTok{$}\NormalTok{Y)                            }
+\FunctionTok{lines}\NormalTok{(gibbs\_result}\SpecialCharTok{$}\NormalTok{expected\_mu, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment2-report_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Expected values as a line}
+\end{Highlighting}
+\end{Shaded}
+
+The result shows that our expected values have followed a similar result
+as the original data. Implying that not much improvement has happened in
+terms of reducing the measurement noise of the concentration. But the
+noise reduction at the start and end is quite pronounced, especially at
+the start, thus, suggesting that our burning period may have been very
+short.
+
+Trace Plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vN }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(gibbs\_output)}
+\NormalTok{vX }\OtherTok{\textless{}{-}}\NormalTok{ gibbs\_output}
+\FunctionTok{plot}\NormalTok{(vN,vX[}\DecValTok{50}\NormalTok{,],}\AttributeTok{pch=}\DecValTok{19}\NormalTok{,}\AttributeTok{cex=}\FloatTok{0.3}\NormalTok{,}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"X"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{"Y"}\NormalTok{, }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{3.5}\NormalTok{), }\AttributeTok{type =} \StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\FloatTok{1.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment2-report_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Our above conclusion is supported by the trace plot, where we see that
+the chain doesnt converge and keeps producing noisy values, but the
+burning period is evidently quite small. But this can also be because
+the data set that we are working with is quite small (only 50
+observations). To expect a good reduction in noise, we would ideally
+want a larger data set.
+
+\end{document}
