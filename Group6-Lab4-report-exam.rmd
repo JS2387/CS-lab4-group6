@@ -46,9 +46,12 @@ Metro_hast <- function(steps ,starting_point, p ){
     X_to_evaluate <- rlnorm(1, meanlog = log(currentX) , p)
     Uniform_var <- runif(1)
     
-    ratio_numerator <- (pdf_function(X_to_evaluate)* dlnorm(currentX, meanlog = log(X_to_evaluate), p) )
-    denominator <- (pdf_function(currentX)*dlnorm(X_to_evaluate,meanlog=log(X_to_evaluate), p))
-#comment: denominator<-(pdf_function(currentX)*dlnorm(X_to_evaluate,meanlog=log(currentX), p))
+    ratio_numerator <- (pdf_function(X_to_evaluate)* 
+                          dlnorm(currentX, meanlog = log(X_to_evaluate), p) )
+    denominator <- (pdf_function(currentX)*
+                      dlnorm(X_to_evaluate,meanlog=log(X_to_evaluate), p))
+#comment: denominator<-(pdf_function(currentX)*
+#                 dlnorm(X_to_evaluate,meanlog=log(currentX), p))
     
     alpha <- min(1 , ratio_numerator / denominator)
     
@@ -69,7 +72,7 @@ sample_1<-Metro_hast(2000,1,1)
 df_1 <- as.data.frame(sample_1)
 df_1$ID <- 1:2000
 
-ggplot(df_1 , aes(x = ID , y = sample_1))+geom_line()
+#ggplot(df_1 , aes(x = ID , y = sample_1))+geom_line()
 
 ```
  
@@ -115,7 +118,7 @@ sample2<-Metro_hast_chi(5000,rchisq(1,1))
 df_2 <- as.data.frame(sample2)
 df_2$ID <- 1:5000
 
-ggplot(df_2 , aes(x = ID , y = sample2))+geom_line()
+#ggplot(df_2 , aes(x = ID , y = sample2))+geom_line()
 
 ```
 
@@ -178,8 +181,6 @@ We now set $t= \beta x$ giving us a easier expression. $\frac{\beta^{\alpha}}{\G
 \
 Now we plug in your values for $\alpha$ and $\beta$ and get $\frac{6}{1}=6$.
 This is in line with what we got in 1.4
-
-\newpage
 
 # Assignment2
 
@@ -328,7 +329,7 @@ load("chemical.RData")
 #converting data into a DF
 chemical_df <- data.frame(X, Y)                  
 #initial plot of data to understand distribution
-plot(X, Y) 
+#plot(X, Y) 
 #3 inputs to sampler: # of time steps, Y to be estimated, known sigma
 mc_gibbs <- function(step, Y, sig) {             
   mu_i <- 0
@@ -366,8 +367,8 @@ gibbs_output <- mc_gibbs(1000, chemical_df$Y, sqrt(0.2))
 gibbs_result <- cbind(chemical_df, rowMeans(gibbs_output))      
 names(gibbs_result) <- c("X", "Y", "expected_mu")               
 #Plot original points
-plot(gibbs_result$X, gibbs_result$Y)                            
-lines(gibbs_result$expected_mu, col = "red")
+# plot(gibbs_result$X, gibbs_result$Y)                            
+# lines(gibbs_result$expected_mu, col = "red")
 #Expected values as a line
 ```
 
@@ -378,10 +379,10 @@ Trace Plot:
 ```{r}
 vN <- 1:ncol(gibbs_output)
 vX <- gibbs_output
-plot(vN,vX[50,],pch=19,cex=0.3,col="black",xlab="X",ylab="Y", ylim=c(0,3.5), type = 'l')
-abline(h=1)
-abline(h=2)
-abline(h=1.5)
+# plot(vN,vX[50,],pch=19,cex=0.3,col="black",xlab="X",ylab="Y", ylim=c(0,3.5), type = 'l')
+# abline(h=1)
+# abline(h=2)
+# abline(h=1.5)
 ```
 
 Our above conclusion is supported by the trace plot, where we see that the chain doesnt converge *(comment: Don't think I agree with this, it seems to converge to some stationary distribution. Yes, this distribution is probably not what we are expecting the posterior to be, but it seems to have converged nonetheless)* and keeps producing noisy values, but the burning period is evidently quite small. But this can also be because the data set that we are working with is quite small (only 50 observations) *(comment: Note that we would only get better results if we have multiple observations per time step. If we have a dataset of 100 observations at 100 different times, we would have 100 parameters $\mu$ to estimate. So this would not necessarily give better results -> we doubled the data but also made the problem twice as hard)* . To expect a good reduction in noise, we would ideally want a larger data set.
